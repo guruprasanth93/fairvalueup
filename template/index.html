@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nifty Candlestick Chart</title>
+</head>
+<body>
+    <h1>Nifty Candlestick Chart</h1>
+
+    <form method="POST">
+        <label for="start_date">Start Date:</label>
+        <input type="date" id="start_date" name="start_date" value="2023-01-01">
+        <label for="end_date">End Date:</label>
+        <input type="date" id="end_date" name="end_date" value="2023-09-30">
+        <input type="submit" name="fetch_nifty" value="Fetch Nifty Data">
+        <input type="submit" name="plot_volume_imbalance" value="Plot Volume Imbalance">
+        <input type="submit" name="plot_bullish_imbalance" value="Plot Bullish Imbalance">
+    </form>
+
+    {% if chart_file %}
+    <h2>Candlestick Chart</h2>
+    <img src="{{ chart_file }}" alt="Candlestick Chart">
+    {% endif %}
+
+    {% if table_file %}
+    <h2>Table</h2>
+    <img src="{{ table_file }}" alt="Table">
+    {% endif %}
+    
+    {% if bullish_vi_boxes %}
+    <h2>Bullish Volume Imbalance Boxes</h2>
+    <ul>
+        {% for box in bullish_vi_boxes %}
+        <li>Left: {{ box['left'] }}, Top: {{ box['top'] }}, Right: {{ box['right'] }}, Bottom: {{ box['bottom'] }}</li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+</body>
+</html>
